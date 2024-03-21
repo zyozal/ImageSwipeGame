@@ -258,7 +258,6 @@ section.scroll .modal:active {
 }
 section.scroll .modal::-webkit-scrollbar {
   height: 5px;
-
 }
 section.scroll .modal::-webkit-scrollbar-thumb {
   background: #000; /* 스크롤바의 색상 */
@@ -268,14 +267,20 @@ section.scroll .modal::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-section.scroll .modal ul {  
+section.scroll .modal ul { 
   display: flex;
 }
 section.scroll .modal li {
-  margin-right: 1%;
-  position: relative;
+  margin-right: 15px;
+  /*  */
   transition: all 1s linear ;
   cursor:pointer;
+}
+
+section.scroll .modal li .t-box {
+  width: 99%;
+  position: relative;
+  overflow: hidden;
 }
 section.scroll .modal li #won {
   width: 75px;
@@ -289,13 +294,13 @@ section.scroll .modal li #won {
 }
 section.scroll .modal li #name, 
 section.scroll .modal li span {
-  margin-left: 2%;
+  margin-left: 1%;
   line-height: 10px;
 }
 section.scroll .modal li span {
   color: #777;
 }
-section.scroll .modal li:hover {
+section.scroll .modal li .t-box:hover {
   border: 1px solid #000;
 }
 section.scroll .modal li:hover #won {
@@ -312,8 +317,8 @@ section.scroll .modal li:hover #won {
   }
 }
 section.scroll .modal li button {
-  width: 100%; /* pathのサイズ */
-	height: 100%; /* pathのサイズ */
+  width: 24px; /* pathのサイズ */
+	height: 24px; /* pathのサイズ */
 	background: #000 ; /* 色 */
 	clip-path: path("M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181");
   position: absolute;
@@ -323,14 +328,14 @@ section.scroll .modal li button {
 
 }
 section.scroll .modal li button:active {
-  width: 100%; /* pathのサイズ */
-	height: 100%; /* pathのサイズ */
+  width: 24px; /* pathのサイズ */
+	height: 24px; /* pathのサイズ */
 	background: #000; /* 色 */
 	clip-path: path("M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z");
 }
 section.scroll .modal li button:hover {
-  width: 100%; /* pathのサイズ */
-	height: 100%; /* pathのサイズ */
+  width: 24px; /* pathのサイズ */
+	height: 24px; /* pathのサイズ */
 	background: #000; /* 色 */
 	clip-path: path("M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z");
   cursor: pointer;
