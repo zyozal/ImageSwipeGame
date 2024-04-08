@@ -4,8 +4,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
-
+#thumbnails {
+  display: flex;
+  position: absolute;
+  width: 500px;
+  height: 100px;
+  background-color: black;
+  top: calc(50% - 400px); /* 수정 */
+}
 #slider {
   display: flex;
   flex-direction: column;
