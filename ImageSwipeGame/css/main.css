@@ -4,9 +4,10 @@
   font-weight: normal;
   font-style: normal;
 }
-
-body {
+* {
   font-family: 'DungGeunMo';
+}
+body {
   height: 100vh;
   margin: 0;
   display: flex;
@@ -25,6 +26,36 @@ body .overlay {
   background: #1D1F29;
 }
 body .winner {
+  height: 300px;
+  display: none;
+  
+}
+body .winner h2 {
+  margin: 0;
+  text-align: center;
+  color: #cea942;
+  font-size: 4em;
+  margin-top: 60px;
+}
+body .apply {
+  border: 2px solid #cea942;
+  background: none;
+  color: #cea942;
+  font-weight: 700;
+  padding: 10px 13px;
+  outline: none;
+  cursor: pointer;
+  margin-top: 100px;
+  margin-left: 85px;
+  border-radius: 4px;
+  transition: all .2s;
+  font-size: 2em;
+}
+body .apply:hover {
+  background: #cea942;
+  color: white;
+}
+body .timeout {
   display: none;
 }
 body .intro {
@@ -54,7 +85,6 @@ body .modal_inner button {
   border: 2px solid #cea942;
   background: none;
   color: #cea942;
-  font-family: 'DungGeunMo';
   font-weight: 700;
   padding: 10px 13px;
   outline: none;
@@ -62,6 +92,7 @@ body .modal_inner button {
   margin-top: 20px;
   border-radius: 4px;
   transition: all .2s;
+  font-size: 2em;
 }
 body .modal_inner button:hover {
   background: #cea942;
@@ -102,6 +133,22 @@ body .modal_inner p {
   left: 100px;
   top: 50px;
 }
+.turns {
+  color: #cea942;
+  position: absolute;
+  top: 60px;
+  font-weight: 400;
+  font-size: 25px;
+  right: 110px;
+}
+.total {
+  color: #cea942;
+  position: absolute;
+  top: 60px;
+  font-weight: 400;
+  font-size: 25px;
+  right: 80px;
+}
 .timer {
   color: #cea942;
   position: absolute;
@@ -118,7 +165,7 @@ body .modal_inner p {
   align-items: center;
   overflow: hidden;
 }
-#slider .slide {
+.slide {
   display: flex;
 }
 
@@ -128,12 +175,12 @@ body .modal_inner p {
   display: block;
   object-fit: cover;
 } 
-button {
+
+#slider button {
   color: pink;
   border: none;
   padding: 10px 50px;
   font-size: 4em;
-  font-family: 'DungGeunMo';
   cursor: pointer;
   background-color:transparent;
   animation: arrow 0.8s infinite linear alternate;
