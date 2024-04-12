@@ -28,11 +28,13 @@ const footImages = [
   'css/images/ed4.jpg',
   'css/images/pt4.jpg'
 ];
+const usedThumbnails = []; // 사용된 썸네일 이미지를 추적하기 위한 배열
 
 const $modal = document.querySelector('.intro');
 const $overlay = document.querySelector('.overlay');
 const $timeout = document.querySelector('.timeout');
 const $winner = document.querySelector('.winner');
+const $correct = document.querySelector('.correct');
 
 // 이전, 다음 버튼 클릭 이벤트
 const [$prev1, $img1, $next1] = [...document.getElementById('slide1').children];
@@ -112,123 +114,84 @@ function imgDataIdSet() {
 
   if (headImgDataId === faceImgDataId && headImgDataId === bodyImgDataId && headImgDataId === footImgDataId) {
     if (thumbnailssrc === headImgDataId) {
-      setTimeout(() => {
-        alert('정답입니다.');
-        correctAnswers++; // 정답일 경우 카운트 증가
-        const turns = document.querySelector('.turns');
-        turns.textContent = correctAnswers;
-
-        if (correctAnswers === 3) { // 정답을 3번 맞췄는지 확인
-          // alert('게임 종료! 축하합니다.');
-          $overlay.style.display = 'block';
-          $winner.style.display = 'block';
-          clearInterval(timer); // 타이머 종료
-          // 게임 종료 시 추가적인 작업을 수행할 수 있습니다.
-        } else {
-          // 정답을 3번 맞추기 전까지 새로운 문제를 제공합니다.
-          displayRandomThumbnails(thumbnailsImages);
-        }
-      }, 150);
+      // 정답 요소를 표시
+      $correct.style.display = 'block';
+  
+      // 애니메이션 종료를 기다린 후에 정답 요소를 화면에서 숨김
+      $correct.addEventListener('animationend', function() {
+        $correct.style.display = 'none';
+      }, {once: true});
+  
+      correctAnswers++; // 정답일 경우 카운트 증가
+      const turns = document.querySelector('.turns');
+      turns.textContent = correctAnswers;
+  
+      if (correctAnswers === 3) { // 정답을 3번 맞췄는지 확인
+        $overlay.style.display = 'block';
+        $winner.style.display = 'block';
+        clearInterval(timer); // 타이머 종료
+        // 게임 종료 시 추가적인 작업을 수행할 수 있습니다.
+      } else {
+        // 정답을 3번 맞추기 전까지 새로운 문제를 제공합니다.
+        displayRandomThumbnails(thumbnailsImages);
+      }
     }
   }
+  
 }
 
-let currentIndex = 0; // 현재 이미지 위치
+// 이미지 배열에서 랜덤으로 인덱스를 선택하는 함수
+function getRandomIndex(array) {
+  return Math.floor(Math.random() * array.length);
+}
 
 $next1.addEventListener('click', () => {
-  // const currentHeadImageSrc = document.getElementById('img1').getAttribute('src');
-  // const currentHeadImageIndex = headImages.indexOf(currentHeadImageSrc);
-
-  // currentImageDisplayRandomImage(headImages, $img1, currentHeadImageIndex);
-
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex++;
-  if (currentIndex >= headImages.length) currentIndex = 0;
+  currentIndex = getRandomIndex(headImages);
   $img1.setAttribute('src', headImages[currentIndex]);
-
   imgDataIdSet();
 });
 
 $prev1.addEventListener('click', () => {
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex--;
-  if (currentIndex < 0) currentIndex = headImages.length - 1;
+  currentIndex = getRandomIndex(headImages);
   $img1.setAttribute('src', headImages[currentIndex]);
-
   imgDataIdSet();
 });
 
 $next2.addEventListener('click', () => {
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex++;
-  if (currentIndex >= faceImages.length) currentIndex = 0;
+  currentIndex = getRandomIndex(faceImages);
   $img2.setAttribute('src', faceImages[currentIndex]);
-
   imgDataIdSet();
 });
 
 $prev2.addEventListener('click', () => {
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex--;
-  if (currentIndex < 0) currentIndex = faceImages.length - 1;
+  currentIndex = getRandomIndex(faceImages);
   $img2.setAttribute('src', faceImages[currentIndex]);
-
   imgDataIdSet();
 });
 
 $next3.addEventListener('click', () => {
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex++;
-  if (currentIndex >= bodyImages.length) currentIndex = 0;
+  currentIndex = getRandomIndex(bodyImages);
   $img3.setAttribute('src', bodyImages[currentIndex]);
-
   imgDataIdSet();
 });
 
 $prev3.addEventListener('click', () => {
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex--;
-  if (currentIndex < 0) currentIndex = bodyImages.length - 1;
+  currentIndex = getRandomIndex(bodyImages);
   $img3.setAttribute('src', bodyImages[currentIndex]);
-
   imgDataIdSet();
 });
 
 $next4.addEventListener('click', () => {
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex++;
-  if (currentIndex >= footImages.length) currentIndex = 0;
+  currentIndex = getRandomIndex(footImages);
   $img4.setAttribute('src', footImages[currentIndex]);
-
   imgDataIdSet();
 });
 
 $prev4.addEventListener('click', () => {
-  // 현재 내가 보고 있는 이미지가 배열의 0번 인덱스라면
-  // 다음버튼을 누르면 1번을 보여줘야한다.
-  currentIndex--;
-  if (currentIndex < 0) currentIndex = footImages.length - 1;
+  currentIndex = getRandomIndex(footImages);
   $img4.setAttribute('src', footImages[currentIndex]);
-
   imgDataIdSet();
 });
-
-// 현재 이미지 제외하고 이외에 이미지 랜덤으로 출력하는 함수
-// function currentImageDisplayRandomImage(imageArray, $imgElement, imgCurrent) {
-//   let tmpImageArray = [...imageArray];
-//   const spliceTmpImageArray = tmpImageArray.splice(imgCurrent, 1);
-//   console.log(spliceTmpImageArray)
-
-//   const randomIndex = Math.floor(Math.random() * spliceTmpImageArray.length);
-//   $imgElement.setAttribute('src', spliceTmpImageArray[randomIndex]);
-// }
 
 // 이미지 랜덤으로 출력하는 함수
 function displayRandomImage(imageArray, $imgElement) {
@@ -241,20 +204,27 @@ function displayRandomImage(imageArray, $imgElement) {
 
 // 썸네일 랜덤 이미지
 function displayRandomThumbnails(imageArray) {
-  // 이미지 배열의 길이를 기반으로 랜덤한 인덱스를 생성합니다.
-  const randomIndex = Math.floor(Math.random() * imageArray.length);
+  let randomIndex;
+
+  do {
+    randomIndex = Math.floor(Math.random() * imageArray.length);
+  } while (usedThumbnails.includes(imageArray[randomIndex])); // 이미 사용된 썸네일 이미지인지 확인
+
+  usedThumbnails.push(imageArray[randomIndex]); // 사용된 썸네일 이미지를 배열에 추가
+
   // 선택된 랜덤 이미지를 이미지 요소의 src 속성에 설정하여 화면에 표시합니다.
   document.getElementById('thumbnails1').setAttribute('src', imageArray[randomIndex]);
 }
 
 
+
 // 시작하기 클릭 이벤트
 const startButton = document.querySelector('.start');
 
-const buttonClickHandler = () => {
-  // startButton.style.display = 'none';
+const startButtonClickHandler = () => {
   $modal.style.display = 'none';
   $overlay.style.display = 'none';
+  $correct.style.display = 'none';
 
   // 제한시간
   setTimeout(function () {
@@ -263,7 +233,7 @@ const buttonClickHandler = () => {
     timer = setInterval(() => {
       let seconds = Math.floor(totalTime / 1000);
 
-      $timer.textContent = `${seconds}초`;
+      $timer.textContent = `남은시간: ${seconds}초`;
 
       totalTime -= 10; // 10밀리초 감소
       if (totalTime < 0) {
@@ -275,5 +245,22 @@ const buttonClickHandler = () => {
   });
 };
 
-startButton.addEventListener('click', buttonClickHandler);
-//button.removeEventListener('click', buttonClickHandler);
+startButton.addEventListener('click', startButtonClickHandler);
+
+
+// 클릭 이벤트 핸들러 함수 정의
+const clickEventHandler = (event, destination) => {
+  $modal.style.display = 'none';
+  $overlay.style.display = 'none';
+  $correct.style.display = 'none';
+  destination.style.display = 'block';
+  location.href = event;
+};
+
+// 응모하기 버튼 클릭 이벤트
+const applyButton = document.querySelector('.apply');
+applyButton.addEventListener('click', () => clickEventHandler('../Apply/indexApply.html', $winner));
+
+// 다시하기 버튼 클릭 이벤트
+const retryButton = document.querySelector('.retry');
+retryButton.addEventListener('click', () => clickEventHandler('./indexImageSwipeGame.html', $timeout));
